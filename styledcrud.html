@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <script src="./purify.js"></script>
+    <script type="module" src="./customdialog.js"></script>
+    <script type="module" src="./styledblog.js"></script>
+    <style>
+        @font-face {
+            font-family: "DateFont";
+            src: url("./fonts/date.ttf");
+        }
+        @font-face {
+            font-family: "TitleFont";
+            src: url("./fonts/title.ttf");
+        }
+
+        .titles{
+            font-family: TitleFont, Arial, Helvetica;
+        }
+        .dates{
+            font-family: DateFont, 'Gill Sans', 'Gill Sans MT';
+        }
+        .summaries{
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 2;
+        }
+
+        body{
+            padding: 0;
+            margin: 0;
+        }
+        .blog-edit{
+            background-color: rgb(193, 255, 255);
+        }
+        .blog-delete{
+            background-color: rgb(255, 196, 196);
+        }
+        section{
+            padding:40px 20px 40px 20px;
+            border-bottom: solid;
+
+        }
+        header{
+            padding: 100px;
+            background-color: black;
+        }
+        body{
+            position: relative;
+            min-height: 100vh;
+        }
+        footer{
+            position: absolute;;
+            margin-top: 100px;
+            bottom: 0;
+        }
+        #main-h1, h2#by{
+            margin: 0;
+            color:white;
+        }
+        main{
+            padding:20px 5% 20px 5%;
+        }
+        #add-container{
+            text-align: center;
+            margin-top: 40px;
+        }
+        #add-btn{
+            width: 50vw;
+            height: 10vh;
+            background-color: black;
+            color: white;
+            font-size: 20px;
+        }
+        #add-btn:hover{
+            animation : opac 3s infinite;
+        }
+        @keyframes opac{
+            0% {opacity: 100%;}
+            50% {opacity:30%;}
+            100% {opacity: 100%;}
+        }
+        dialog{
+            position: fixed;
+            width: 20%;
+            height: 30%;
+
+        }
+        #confirm-dialog{
+            height: 10%;
+        }
+        input{
+            line-height: 2;
+
+            width: 200px;
+        }
+        label{
+            display: inline-block;
+            width: 140px;
+            text-align: left;
+        }
+        #add-ok{
+            margin-top: 25px;
+            background-color: rgb(248, 255, 248);
+        }
+        
+        #add-cancel{
+            margin-top: 25px;
+            background-color: rgb(255, 249, 249);
+        }
+        #confirm-ok{
+            margin-top: 25px;
+            background-color: rgb(248, 255, 248);
+        }
+        
+        #confirm-cancel{
+            margin-top: 25px;
+            background-color: rgb(255, 249, 249);
+        }
+        #edit-ok{
+            margin-top: 25px;
+            background-color: rgb(248, 255, 248);
+        }
+        
+        #edit-cancel{
+            margin-top: 25px;
+            background-color: rgb(255, 249, 249);
+        }
+        
+        
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="main-h1">
+            Title
+        </h1>
+        <hr />
+        <h2 id="by">subtitle</h2>
+    </header>
+    <main id="mainpage">
+        <div id="content-div">
+
+        </div>
+        <dialog id="add-dialog">
+            <label for="add-title">Title<input id="add-title" type="text"></label> <br />
+            <label for="add-date">Date<input id="add-date" type="date"></label> <br />
+            <label for="add-summary">Description<input id="add-summary" type="text"></label> <br />
+            <button id="add-ok">Add</button>
+            <button id="add-cancel">Cancel</button>
+        </dialog>
+
+        <dialog id="edit-dialog">
+            <label for="edit-title">Title<input id="edit-title" type="text"></label> <br />
+            <label for="edit-date">Date<input id="edit-date" type="date"></label> <br />
+            <label for="edit-summary">Summary<input id="edit-summary" type="text"></label> <br />
+            <button id="edit-ok">Save</button>
+            <button id="edit-cancel">Cancel</button>
+        </dialog>
+
+        <dialog id="confirm-dialog">
+            Do you confirm this?
+            <br />
+            <button id="confirm-cancel">Cancel</button>
+            <button id="confirm-ok">Yes</button>
+        </dialog>
+        
+        <div id="add-container">
+            <button id="add-btn">
+                Add Element
+            </button>
+
+        </div>
+    </main>
+
+
+
+    <script type="module">
+        import * as Blogs from "./styledblog.js";
+
+        window.addEventListener('DOMContentLoaded', function(){
+
+            Blogs.update();
+
+            document.getElementById('add-ok').addEventListener('click', function(){
+
+                document.getElementById('add-dialog').close();
+                Blogs.add();
+
+            })
+
+            document.getElementById('add-cancel').addEventListener('click', function(e){
+                document.getElementById('add-dialog').close();
+            })
+
+            document.getElementById('add-btn').addEventListener('click', function(){
+                document.getElementById('add-dialog').showModal();
+
+            });
+
+
+        });
+        
+
+
+
+
+    </script>
+</body>
+</html>
